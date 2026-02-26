@@ -1,0 +1,36 @@
+[2/26, 11:15 PM] _kobby.™️: Index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Free Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Welcome to My Website</h1>
+    <p id="message">Click the button below</p>
+
+    <button onclick="changeText()">Click Me</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
+[2/26, 11:16 PM] _kobby.™️: Style.css
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    text-align: center;
+    margin-top: 100px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+[2/26, 11:17 PM] _kobby.™️: Script.js
+function changeText() {
+    document.getElementById("message").innerHTML =
+        "🎉 You just created a JavaScript website!";
+}
