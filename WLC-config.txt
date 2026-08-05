@@ -1,0 +1,31 @@
+WLC management IP: 10.99.99.10/24 (VLAN 99)
+Steps (Packet Tracer GUI):
+1. Configure WLC Management Interface:
+   - IP: 10.99.99.10
+   - Default Gateway: 10.99.99.1
+   - VLAN: 99
+2. Add RADIUS Server (Authentication):
+   - IP: 10.20.20.10
+   - Port: 1812
+   - Shared secret: <CHANGE_ME>
+3. Create WLANs:
+   - SSID: CAMPUS-STAFF
+     Security: WPA2-Enterprise (802.1X)
+     Mapped VLAN: 100 (10.100.100.0/24)
+     Authentication: RADIUS (10.20.20.10)
+   - SSID: CAMPUS-STUDENTS
+     Security: WPA2-Enterprise (802.1X)
+     Mapped VLAN: 200 (10.200.200.0/24)
+     Authentication: RADIUS (10.20.20.10)
+   - SSID: CAMPUS-GUEST
+     Security: Web Auth (Internal or External)
+     Mapped VLAN: 999 (10.250.250.0/24)
+     Apply Guest ACL: deny internal ranges, allow internet
+4. APs
+   - Ensure AP management reachable on VLAN 99
+   - APs will CAPWAP join the WLC (verify status in Monitor -> Access Points)
+5. WLC HA (if simulating):
+   - Configure primary and secondary WLCs and define redundancy parameters (if actual WLCs support it)
+Notes:
+- Packet Tracer WLC GUI screens: use screenshots for report insertion.
+- Use strong shared secret and secure WLC management access (SSH).

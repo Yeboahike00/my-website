@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1400" height="900" xmlns="http://www.w3.org/2000/svg">
+ <rect x="10" y="10" width="1380" height="880" fill="#fff" stroke="#333"/>
+ <text x="700" y="40" font-size="16" text-anchor="middle">Logical Topology — (Replace this SVG with Packet Tracer screenshot)</text>
+ <text x="700" y="80" font-size="12" text-anchor="middle">Placeholders: Edge Router, Core Switches, Distribution, Access Switches, WLC, APs, RADIUS, Servers, Clients</text>
+ <!-- Simple icons -->
+ <rect x="60" y="120" width="140" height="60" fill="#fff" stroke="#333"/><text x="130" y="155" font-size="12" text-anchor="middle">Edge Router</text>
+ <rect x="240" y="120" width="160" height="60" fill="#fff" stroke="#333"/><text x="320" y="155" font-size="12" text-anchor="middle">Core Switch 1</text>
+ <rect x="420" y="120" width="160" height="60" fill="#fff" stroke="#333"/><text x="500" y="155" font-size="12" text-anchor="middle">Core Switch 2</text>
+ <rect x="600" y="120" width="140" height="60" fill="#fff" stroke="#333"/><text x="670" y="155" font-size="12" text-anchor="middle">WLC</text>
+ <rect x="780" y="120" width="140" height="60" fill="#fff" stroke="#333"/><text x="850" y="155" font-size="12" text-anchor="middle">RADIUS Server</text>
+ <text x="700" y="230" font-size="12" text-anchor="middle">[Replace this entire SVG with a high-res Packet Tracer exported PNG for final report]</text>
+</svg>

@@ -1,0 +1,10 @@
+# FreeRADIUS sample clients.conf and users entries
+# clients.conf
+client wlc {
+ ipaddr = 10.99.99.20
+ secret = <CHANGE_ME>
+}
+# users
+staff1 Cleartext-Password := "StaffPass!2025"
+student1 Cleartext-Password := "StudPass2025"
+# For AD integration use rlm_ldap or winbind with appropriate config (document steps in report)

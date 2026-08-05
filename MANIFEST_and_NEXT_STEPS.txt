@@ -1,0 +1,26 @@
+Manifest and next steps:
+
+Files committed to this branch:
+- FINAL_YEAR_PROJECT_WIRELESS_CAMPUS_DESIGN.docx
+- EDGE-RTR-config.txt
+- CORE-SW1-config.txt
+- CORE-SW2-config.txt
+- ACCESS-SW-Floor1-config.txt
+- WLC-config.txt
+- RADIUS-config.txt
+- 02-Comparative-Architecture.svg
+- 03-Simulation-Flowchart.svg
+- 03-Logical-Topology.svg
+- AP-Placement-BldgA-F1.svg
+- MANIFEST_and_NEXT_STEPS.txt
+
+Next steps for you:
+1) Clone the repo or download the DOCX from the branch.
+2) Open the DOCX file in Word; generate the Table of Contents and replace SVG placeholders with Packet Tracer screenshots as needed.
+3) Replace all <CHANGE_ME> placeholders in config files with strong secrets before using in production.
+4) Use the provided config .txt files as copy/paste templates in Packet Tracer to reproduce the topology and run tests.
+
+Notes:
+- Guest VLAN is VLAN 999 -> 10.250.250.0/24.
+- Date on title page set to August 2026.
+- If you want the files packaged as a ZIP or moved to a different repo, tell me.

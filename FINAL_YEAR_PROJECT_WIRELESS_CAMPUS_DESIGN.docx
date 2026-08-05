@@ -1,0 +1,167 @@
+Title: Wireless Campus Network Design and Implementation Using Cisco Packet Tracer
+Student: Mathias Asmah — 04/2023/2097D
+Student: Ibrahim Daniel — 04/2023/2096D
+Student: Andy Amoanor — 04/2023/2094D
+Student: Isaac Adu-Yeboah — 04/2022/1266D
+Student: Kelvin Adjei — 04/2023/2095D
+Student: Theophilus Yeboah — 04/2023/2084D
+Supervisor: Docter bright annibrika
+Department: Department of Computer Science, Koforidua Technical University
+Date: August 2026
+
+Abstract
+This project designs, implements and evaluates a secure, scalable wireless campus network using Cisco Packet Tracer. The network supports multiple user groups across academic, administrative and residential areas, implementing VLAN segmentation, controller‑based WLAN (WLC + CAPWAP), WPA2‑Enterprise (802.1X) with RADIUS authentication, DHCP/DNS services, QoS for voice and video, guest captive portal, research lab isolation, and redundancy (HSRP, LACP, WLC HA). Simulation tests measure throughput, latency, jitter and authentication performance. Results demonstrate functional authentication workflows, VLAN isolation, prioritized voice/video traffic, and the viability of the design for campus deployment. Appendices contain full device configurations, test scripts, and instructions to reproduce the Packet Tracer topology.
+
+Acknowledgements
+[Insert brief acknowledgements.]
+
+Table of Contents
+[Use Word to auto-generate TOC after pasting.]
+
+List of Figures
+Figure 2.1 — Comparative architectures: flat VLAN vs. VLAN+WLC+RADIUS (file: 02-Comparative-Architecture.svg)
+Figure 3.1 — Simulation Flowchart (file: 03-Simulation-Flowchart.svg)
+Figure 3.2 — Logical Topology Diagram (file: 03-Logical-Topology.svg)
+Figure 6.1 — AP Placement: Building A, Floor 1 (file: AP-Placement-BldgA-F1.svg)
+Figure 6.2 — WLC & RADIUS Integration (file: WLC-RADIUS-Diagram.png)
+Figure 4.1 — Throughput Graph (file: Graph-Throughput.png)
+Figure 4.2 — RTT & Jitter Graphs (file: Graph-RTT.png, Graph-Jitter.png)
+Figure A.1 — Packet Tracer PDU Event Snapshot (file: Simulation-PDU-Event-1.png)
+
+List of Tables
+Table 3.1 — VLAN and IP addressing plan (Appendix B)
+Table 6.1 — Device inventory and Packet Tracer models
+Table 4.1 — Test cases and expected results
+
+CHAPTER ONE — INTRODUCTION
+1.1 Background
+The proliferation of mobile devices and the central role of digital resources in learning have made robust campus wireless networks essential. Traditional flat network designs often fail as user density and multimedia demands increase, causing performance degradation and security gaps. This project proposes and validates a controller‑based campus WLAN architecture with VLAN segmentation, WPA2‑Enterprise (802.1X) authentication backed by RADIUS, QoS for real‑time traffic, and redundancy for high availability.
+
+1.2 Problem statement
+The university’s wireless network is susceptible to unauthorized access, lacks segmentation for research/administration, and cannot guarantee quality for VoIP and video streaming.
+
+1.3 Objectives
+- Design a VLAN-segmented campus network supporting 12 department/area VLANs and dedicated WLAN SSIDs.
+- Implement centralized authentication using WPA2‑Enterprise and RADIUS.
+- Configure QoS policies to prioritize VoIP (DSCP EF) and video streaming (AF41).
+- Validate roaming, authentication latency, VLAN isolation and QoS via Packet Tracer simulation and document results.
+- Produce a deployment-ready configuration bundle and a full report.
+
+1.4 Scope & limitations
+Scope: IPv4-only design, Packet Tracer simulation, sample RADIUS integration (FreeRADIUS/NPS).
+Limitations: RF behavior, real-world interference, and some enterprise WLC HA behaviors are not fully modeled in Packet Tracer. A real site survey is recommended before deployment.
+
+CHAPTER TWO — LITERATURE REVIEW
+2.1 Introduction
+This chapter surveys campus WLAN architectures, 802.1X/RADIUS authentication, and QoS mechanisms for VoIP and video. It establishes best practices that inform the design.
+
+2.2 Review of Similar Network Systems
+- Flat VLAN-only designs: simple to deploy but suffer scalability and security issues.
+- Controller-based architectures (WLC + CAPWAP): centralized management, easier SSID/policy rollout, better roaming support.
+- 802.1X & RADIUS: per-user authentication widely recommended in campus environments to enforce credentials and policy.
+- QoS models: DiffServ with DSCP EF for voice and AF for video is standard.
+
+Figure 2.1 — Comparative Architecture
+(Insert file: 02-Comparative-Architecture.svg)
+Caption: shows advantages (central auth, policy, roaming).
+
+2.3 Summary and Gap Analysis
+Most literature supports controller-based designs for medium–large campuses and recommends segmentation and 802.1X. Gaps: many works do not address guest captive portal integration and research lab isolation simultaneously—this project addresses both.
+
+References (for Chapter 2)
+- Cisco Systems. Cisco Campus Design Guide. [URL]
+- IEEE Std 802.11-2016 — Wireless LAN Standards.
+- Gast, M. (2013). 802.11 Wireless Networks: The Definitive Guide. O’Reilly.
+- FreeRADIUS Project documentation. [URL]
+
+CHAPTER THREE — RESEARCH METHODOLOGY (SIMULATION DESIGN)
+3.1 Introduction
+Design Science methodology: build an artifact (network design) and evaluate via simulation in Packet Tracer.
+
+3.2 Justification for Simulation & Simulator
+3.2.1 Why simulation?
+- Simulation enables controlled evaluation of policies (802.1X flows, roaming) with lower cost than physical deployment.
+3.2.2 Why Cisco Packet Tracer?
+- Packet Tracer supports topology building, WLC/AP behaviors, server simulation (DHCP, HTTP, RADIUS) and is suitable for teaching and final year projects. Limitations: RF fidelity, advanced WLC HA behaviors may be limited.
+3.2.3 Simulation Flowchart and Logical Diagram
+- Insert flowchart: 03-Simulation-Flowchart.svg
+- Insert logical topology screenshot: 03-Logical-Topology.svg
+- Caption each figure and include short method notes: VLAN mapping, device IPs, and management VLAN.
+
+3.3 Simulation Data Definition
+3.3.1 Measurement metrics
+- Throughput (kbps), RTT (ms), Jitter (ms), Packet loss (%), Authentication time (ms), Reassociation latency (ms).
+3.3.2 Simulation Configuration Table
+- Table of parameters: number of clients, packet sizes, traffic patterns (RTP for voice, TCP for HTTP/video), number of concurrent sessions.
+3.3.3 Measurement collection strategy
+- Use Packet Tracer CLI logs, server logs, and manual timestamping to produce CSV files for plotting.
+3.3.4 Simulation Results (graphs)
+- Export graphs from Excel based on test outputs: Graph-Throughput.png, Graph-RTT.png, Graph-Jitter.png.
+
+3.4 Ethical considerations and validity
+Simulated user accounts used for testing; no private data.
+
+CHAPTER FOUR — PRESENTATION OF RESULTS AND ANALYSIS
+4.1 Introduction
+Summarize the test plan and present results in chronological order.
+
+4.2 Presentation of Results and Comparative Analysis
+Authentication: show RADIUS Access-Accept logs screenshot (Auth-Logs-Access-Accept.png). Report authentication success rates and average authentication latency.
+VLAN isolation: ping tests showing successful Staff→Server and failed Guest→Server (Ping-Results-VLAN-Isolation.png).
+QoS: voice traffic priority—show sample pcap/pdu logs or Packet Tracer simulation traces indicating prioritized RTP packets (Simulation-PDU-Event-1.png).
+Throughput & latency graphs: include Graph-Throughput.png and Graph-RTT.png. Present tables with averages and standard deviations.
+
+4.3 Comparative Analysis
+Compare measured results to expectations and literature (e.g., acceptable VoIP jitter < 30 ms; average RTT for voice < 50 ms). Discuss how controller-based design improved roaming vs flat designs.
+
+4.4 Summary & Threats to validity
+Discuss Packet Tracer limits and suggest real-world site survey.
+
+CHAPTER FIVE — CONCLUSIONS AND RECOMMENDATIONS
+5.1 Summary of Findings
+Design met objectives: segmentation, secure auth, guest isolation, voice/video QoS, and redundancy configured in design.
+
+5.2 Conclusions
+A controller-based campus WLAN with WPA2‑Enterprise and adequate VLAN design is suitable for campus needs; Packet Tracer simulation confirms functional flows.
+
+5.3 Recommendations
+- Conduct on-site RF survey before deployment.
+- Use AD integration (NPS) in production for centralized auth.
+- Consider WPA3-Enterprise in future for improved security.
+- Schedule redundancy tests and periodic audits.
+
+5.4 Future Work
+Extend tests to include realistic RF interference studies, real hardware pilot, and IPv6 addressing.
+
+REFERENCES
+- Cisco Systems. (2018). Cisco Campus Design Guide. https://www.cisco.com
+- IEEE Std 802.11-2016.
+- Gast, M. (2013). 802.11 Wireless Networks: The Definitive Guide. O’Reilly.
+- FreeRADIUS. (n.d.). FreeRADIUS documentation. https://freeradius.org
+- Microsoft. (n.d.). Network Policy Server (NPS). https://docs.microsoft.com
+- RFC 4594. (2006). A Framework for Real‑Time and Multimedia Services in a DiffServ Network.
+
+APPENDIX A — DEVICE CONFIGURATIONS (copy/paste-ready)
+
+[See separate config files in repo]
+
+APPENDIX B — VLAN & IP ADDRESSING TABLE
+VLAN | Name | Subnet | Gateway | Notes
+10 | Computer Science & IT | 10.10.10.0/24 | 10.10.10.1 | Labs + Faculty PCs
+20 | Engineering | 10.20.20.0/24 | 10.20.20.1 | Workshops
+30 | Business & Management | 10.30.30.0/24 | 10.30.30.1 | Lecture rooms
+40 | Science | 10.40.40.0/24 | 10.40.40.1 | Labs + research
+50 | Humanities & Arts | 10.50.50.0/24 | 10.50.50.1 | Classrooms
+60 | Administration | 10.60.60.0/24 | 10.60.60.1 | Registrar, Finance, HR
+70 | Library | 10.70.70.0/24 | 10.70.70.1 | Public access
+80 | Student Hostels | 10.80.80.0/24 | 10.80.80.1 | Dorm Wi‑Fi
+99 | Management / Infrastructure | 10.99.99.0/24 | 10.99.99.1 | Servers & management
+100 | Wireless Staff | 10.100.100.0/24 | 10.100.100.1 | Staff SSID
+200 | Wireless Students | 10.200.200.0/24 | 10.200.200.1 | Student SSID
+999 | Guests | 10.250.250.0/24 | 10.250.250.1 | Guest VLAN (internet-only)
+
+APPENDIX C — TEST PLAN & CSV TEMPLATE
+CSV columns: test_id,timestamp,src,dst,traffic_type,pkt_size,rtt_ms,throughput_kbps,jitter_ms,notes
+
+APPENDIX D — DIAGRAM CREATION CHECKLIST
+[See MANIFEST_and_NEXT_STEPS.txt in repo]

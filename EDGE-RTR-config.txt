@@ -1,0 +1,45 @@
+hostname EDGE-RTR
+!
+interface GigabitEthernet0/0
+ description To_ISP
+ ip address dhcp
+ ip nat outside
+ no shutdown
+!
+interface GigabitEthernet0/1
+ description To_Core
+ ip address 10.10.0.2 255.255.0.0
+ ip nat inside
+ no shutdown
+!
+ip nat inside source list 10 interface GigabitEthernet0/0 overload
+access-list 10 permit 10.0.0.0 0.255.255.255
+!
+! QoS (example)
+class-map match-any VOICE
+ match ip dscp ef
+class-map match-any VIDEO
+ match ip dscp af41
+policy-map WAN-QOS-OUT
+ class VOICE
+  priority percent 25
+ class VIDEO
+  bandwidth percent 35
+ class class-default
+  fair-queue
+interface GigabitEthernet0/0
+ service-policy output WAN-QOS-OUT
+!
+! Guest ACL (applied on core SVI or edge)
+ip access-list extended GUEST-INTERNET
+ permit ip 10.250.250.0 0.0.0.255 any
+ deny ip 10.250.250.0 0.0.0.255 10.10.0.0 0.0.255.255
+ permit ip any any
+!
+ip route 0.0.0.0 0.0.0.0 GigabitEthernet0/0
+!
+line vty 0 4
+ login local
+ transport input ssh
+!
+end
